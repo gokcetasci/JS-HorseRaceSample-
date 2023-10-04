@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HorseRace Game</title>
+    <style>
+        body {
+            background-color: green;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: row;
+            margin-top: 24px;
+            margin-left: 24px;
+        }
+
+        .headercontent {
+            width: 1213px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        button {
+            width: 150px;
+            height: 40px;
+            background-color: red;
+            color: #fff;
+            border-style: solid;
+            border-color: #fff;
+            border-radius: 16px;
+            font-size: 24px;
+            font-weight: bolder;
+            margin-bottom: 36px;
+        }
+
+        img {
+            width: 200px;
+            height: 150px;
+            margin-bottom: 24px;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .line {
+            width: 6px;
+            height: 600px;
+            background-color: red;
+            position: fixed;
+            right: 100px;
+        }
+
+        h2 {
+            color: red;
+            text-align: right;
+            padding-right: 36px;
+        }
+
+        span {
+            padding-left: 100px;
+        }
+
+        p {
+            margin-top: 6px;
+            font-size: 24px;
+            color: #fff;
+            background-color: blue;
+        }
+
+        .winner {
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="horseracegame">
+        <div class="header">
+            <div class="headercontent">
+                <div class="winner">
+                    <button onclick="start()">START</button>
+                    <span>
+                        <p id="winnerText"></p>
+                    </span>
+                </div>
+                <img id="horse1" src="./images/horse1.jpg" alt="beyazat">
+                <img id="horse2" src="./images/horse2.jpg" alt="kahverengiat">
+                <img id="horse3" src="./images/horse3.jpg" alt="siyahat">
+
+            </div>
+            <div class="line"></div>
+        </div>
+    </div>
+    <h2>BİTİŞ ÇİZGİSİ</h2>
+
+</body>
+<script>
+    function start() {
+        var total1 = 0;
+        var total2 = 0;
+        var total3 = 0;
+
+        var horse1 = document.getElementById("horse1");
+        var horse2 = document.getElementById("horse2");
+        var horse3 = document.getElementById("horse3");
+        var line = document.querySelector(".line");
+
+        raceInterval = setInterval(() => {
+            var randomSpeed1 = Math.floor(Math.random() * 10) + 1;
+            var randomSpeed2 = Math.floor(Math.random() * 10) + 1;
+            var randomSpeed3 = Math.floor(Math.random() * 10) + 1;
+
+            total1 += randomSpeed1;
+            total2 += randomSpeed2;
+            total3 += randomSpeed3;
+
+            horse1.style.marginLeft = total1 + "px";
+            horse2.style.marginLeft = total2 + "px";
+            horse3.style.marginLeft = total3 + "px";
+
+            if (total1 >= 1190 || total2 >= 1190 || total3 >= 1190) {
+                clearInterval(raceInterval);
+
+                horse1.style.marginLeft = "1190px";
+                horse2.style.marginLeft = "1190px";
+                horse3.style.marginLeft = "1190px";
+                if (total1 >= 1190) {
+                    winner = 1;
+                } else if (total2 >= 1190) {
+                    winner = 2;
+                } else {
+                    winner = 3;
+                }
+
+                document.getElementById("winnerText").innerHTML = " Yarışı Kazanan At: " + winner;
+            }
+
+        }, 20);
+    }
+</script>
+
+</html>
